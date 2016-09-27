@@ -2,7 +2,7 @@
 #define _PHONEBOOK_H
 
 #define MAX_LAST_NAME_SIZE 16
-
+#define TABLE_SIZE 42737
 /* TODO: After modifying the original version, uncomment the following
  * line to set OPT properly */
 #define OPT 1
@@ -25,7 +25,12 @@ typedef struct __PHONE_BOOK_ENTRY {
     struct __PHONE_BOOK_ENTRY *pNext;
 } entry;
 
-entry *findName(char lastName[], entry *pHead);
-entry *append(char lastName[], entry *e);
+typedef struct __PHONE_BOOK_HASH {
+    entry **list;
+} hashTable;
 
+entry *findName(char lastName[], hashTable *tb);
+void append(char lastName[], hashTable *tb);
+hashTable *createHashTable(int tablesize);
+unsigned int hash(char *str);
 #endif
